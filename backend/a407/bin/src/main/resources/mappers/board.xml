@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.a407.dao.BoardDao">
+	<insert id="createBoard" parameterType="BoardDto">
+		insert into board (email, nickname, title, contents, noticeFlag, category) values (#{email}, #{nickname}, #{title}, #{contents}, #{noticeFlag}, #{category})
+	</insert>
+	
+	<select id="searchAll" resultType="BoardDto">
+		select *
+		from a407.board
+		where category = #{category}
+	</select>
+	
+	<select id="searchBId" parameterType="String" resultType="BoardDto">
+		select *
+		from a407.board
+		where bId = #{word}
+	</select>
+	
+	<select id="searchTitle" resultType="BoardDto">
+		select *
+		from a407.board
+		where title like CONCAT('%', #{word}, "%") and category = #{category}
+	</select>
+	
+	<select id="searchName" resultType="BoardDto">
+		select *
+		from a407.board
+		where nickname like CONCAT('%', #{word}, "%") and category = #{category}
+	</select>
+	
+	<select id="searchContents" resultType="BoardDto">
+		select *
+		from a407.board
+		where contents like CONCAT('%', #{word}, "%") and category = #{category}
+	</select>
+	
+	<update id="updateBoard" parameterType="map">update a407.board set title = #{title}, contents = #{contents}, noticeFlag = #{noticeFlag}, category= #{category} where bId = #{bId} and email = #{email}</update>
+	
+	<delete id="deleteBoard" parameterType="int">delete from a407.board where bId = #{bId}</delete>
+</mapper>

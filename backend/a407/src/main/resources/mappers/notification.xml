@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.ssafy.a407.dao.NotificationDao">
+
+	<insert id="insertNotification" parameterType="NotificationDto">
+		insert into a407.notification (receiveEmail,sendEmail,isRead,type,contentId, message , notiUrl) 
+		values (#{receiveEmail},#{sendEmail},#{isRead},#{type},#{contentId}, #{message}, #{notiUrl})
+	</insert>
+	
+	<select id="selectNotification" parameterType="String" resultType="NotificationDto">
+		select *
+		from a407.notification
+		where receiveEmail = #{receiveEmail}
+	</select>
+	
+	<delete id="deleteNotification" parameterType="int">
+		delete from a407.notification where nId = #{nId}
+	</delete>
+	
+	<update id="updateNotification" parameterType="NotificationDto">
+ 		update a407.notification
+ 		set isRead = #{isRead}
+ 		where nId = #{nId}
+ 	</update>
+</mapper> 

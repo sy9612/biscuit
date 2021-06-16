@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.ssafy.a407.dao.LoginDao">
+	<select id="login" parameterType="map" resultType="UserDto">
+		select *
+		from user
+		where email = #{email} and password = #{password}
+	</select>
+	
+	<insert id="insertUser" parameterType="UserDto">
+		insert into user (email,nickname,password,picture,phone, region, admin) values (#{email},#{nickname},#{password},#{picture},#{phone}, #{region}, #{admin})
+	</insert>
+	<delete id="removeUser" parameterType="map">delete from user where email = #{email} and password = #{password}</delete>
+	<update id="updateUser" parameterType="map">update user set nickname = #{nickname}, picture = #{picture}, phone = #{phone}, region = #{region} where email = #{email}</update>
+	<update id="pwupdateUser" parameterType="map">update user set password = #{newpassword} where email = #{email}</update>
+	<select id="profileUser" parameterType="String" resultType="UserDto">select * from user where email = #{email}</select>
+	
+	<update id="updateAdmin" parameterType="map">
+		update user set admin = #{admin}
+		where email = #{email}
+	</update>
+	
+	<select id="profileUserName" parameterType="String" resultType="String">select email from user where nickname like CONCAT('%', #{nickname}, "%")</select>
+</mapper> 

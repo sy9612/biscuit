@@ -1,0 +1,97 @@
+<template>
+  <div class="container" id="app" v-cloak>
+    <div>
+      <h2>{{ room.roomName }}</h2>
+    </div>
+
+    <!-- eslint-disable vue/no-use-v-if-with-v-for,vue/no-confusing-v-for-v-if -->
+    <div>
+      <span v-for="member in members" v-bind:key="member.crmId">
+        <a v-if="member.isJoin==1" style="margin-right:5px" class="btn btn-primary btn-round bt<template>
+            <div>
+              <div class=" page-header clear-filter" filter-color="orange">
+          <parallax class="page-header-image" style="background-image:url('img/header.jpg')">
+          </parallax>
+          <div class="container">
+            <div class="content-center brand">
+              <img class="n-logo" src="img/bisWhite.png" alt="" />
+              <h1 class="h1-seo" style="font-weight:bold">아직까지 혼자 공부하세요?</h1>
+              <h3>비스킷에서 전국 {{groups.length}}개의 스터디를 찾고 함께 공부하세요</h3>
+              <router-link class="navbar-brand" to="/grouplist">
+                <b-button class="btn-primary btn-round btn-lg" data-aos="flip-left">지금 시작하기</b-button>
+              </router-link>
+              <div><i class="now-ui-icons arrows-1_minimal-down"></i></div>
+            </div>
+          </div>
+    </div>
+    <div class="main">
+      <div class="section section-images">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="hero-images-container">
+                <img src="img/Group 44.png" alt="" />
+              </div>
+            </div>
+            <div class="col-md-6 ml-auto mr-auto text-center">
+              <div class="hero-images-container-3 ">
+                <h2 style="font-weight:bold; text-align:center">비대면 시대에도 언제나 스터디,</h2>
+                <div class="row">
+                  <div class="col-md-6 ml-auto mr-auto text-center">
+
+                    <div class=" d-flex justify-content-center" data-aos="zoom-in" data-aos-easing="ease-out-cubic"
+                      data-aos-duration="1000">
+                      <img class="col-md-12 col-sm-4 col-xs-2" src="img/path225.png" alt="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <hr>
+    </div>
+    <br>
+  </div>
+</template>n-lg">{{member.nickname}}</a>
+<a v-else style="background-color:#9b9b9b; margin-right:5px"
+  class="btn btn-primary btn-round btn-lg">{{member.nickname}}</a>
+</span>
+</div>
+<br />
+<div id="row">
+  <div class="items">
+    <ul class="list-group" id="chatList" onscroll>
+      <li class="list-group-item" v-for="message in messages" v-bind:key="message.id"
+        v-if="message.type=='TALK' || message.type=='JOIN'">
+        <a v-if="message.type=='TALK'">{{ message.nickname }} - {{ message.message }}</a>
+        <a v-if="message.type=='JOIN'">{{message.message}}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- <div class="input-group">
+      <input type="text" class="form-control" v-model="message" v-on:keypress.enter="sendMessage" />
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button" @click="sendMessage">보내기</button>
+      </div>
+    </div> -->
+
+<br /><br />
+<div>
+
+  <b-input-group>
+    <b-form-input style="border-radius:10px" type="text" v-model="message" v-on:keyup.enter="sendMessage()" />
+    <b-input-group-append>
+      <b-button text="Button" variant="primary" class="btnSearch mt-0" style="border-radius:10px; font-weight: bold"
+        v-on:click="sendMessage()">
+        확인
+      </b-button>
+    </b-input-group-append>
+  </b-input-group>
+</div>
+</div>
+</template>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.ssafy.a407Chat.dao.ChatRoomMemberDao">	
+	<insert id="insertChatMember" parameterType="ChatRoomMemberDto">
+		insert into a407.chatRoomMember(roomId, nickname, email)
+		values(#{roomId}, #{nickname}, #{email})
+	</insert>
+	
+	<select id="selectMyRoom" parameterType="string" resultType="ChatRoomDto">
+		select * from a407.chatRoom
+		where roomId = 
+		ANY(select roomId
+		from a407.chatRoomMember
+		where email = #{email}
+		);
+	</select>
+	
+	<select id="selectRoomMember" parameterType="string" resultType="ChatRoomMemberDto">
+		select * from a407.chatRoomMember
+		where roomId = #{roomId}
+	</select>
+	
+	<update id="updateIsJoin" parameterType="Map">
+		update a407.chatRoomMember
+		set isJoin = 1
+		where roomId = #{roomId} and nickname = #{nickname}
+	</update>
+</mapper> 

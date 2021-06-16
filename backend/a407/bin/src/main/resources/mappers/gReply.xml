@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.ssafy.a407.dao.GroupReplyDao">
+ 	<insert id="insertReply" parameterType="GroupReplyDto">
+ 		insert into a407.gReply (bId, email, nickname, contents, date) 
+ 		values (#{bId},#{email},#{nickname},#{contents},now())
+ 	</insert>
+ 	
+ 	<update id="updateReply" parameterType="GroupReplyDto">
+ 		update a407.gReply
+ 		set contents = #{contents}, date = now()
+ 		where rId = #{rId}
+ 	</update>
+ 	
+ 	<delete id="deleteReply" parameterType="int">
+ 		delete from a407.gReply where rId = #{rId}
+ 	</delete>
+ 	
+ 	<select id="selectAll" resultType="GroupReplyDto">
+ 		select rId, bId, email, contents, date
+ 		from a407.gReply
+ 	</select>
+ 	
+ 	<select id="getReplyList" parameterType="map" resultType="GroupReplyDto">
+		select rId, bId, email, nickname, contents, date
+		from a407.gReply
+		where bId = #{bId}
+		order by rId desc
+	</select>
+
+	<select id="getReplyListCnt" parameterType="int" resultType="int">
+		select count(*) as listCnt
+		from a407.gReply
+		where bId = #{bId}
+	</select>
+	
+ </mapper> 

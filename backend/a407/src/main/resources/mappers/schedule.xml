@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.ssafy.a407.dao.ScheduleDao">
+ 	<insert id="insertSchedule" parameterType="ScheduleDto">
+ 		insert into schedule (pgFlag,email,gId,sdate,edate,title,contents) 
+ 		values (#{pgFlag},#{email},#{gId},#{sdate},#{edate},#{title},#{contents})
+ 	</insert>
+ 	
+ 	<select id="selectSchedule" parameterType="int" resultType="ScheduleDto">
+ 		select sId, pgFlag, email, gId, sdate, edate, title, contents 
+ 		from a407.schedule 
+ 		where sId = #{sId}
+ 	</select>
+ 	
+ 	<select id="selectGroupSchedule" parameterType="int" resultType="ScheduleDto">
+ 		select sId, pgFlag, email, gId, sdate, edate, title, contents 
+ 		from a407.schedule 
+ 		where gId = #{gId}
+ 	</select>
+
+ 	<select id="selectPersonalSchedule" parameterType="String" resultType="ScheduleDto">
+ 		select sId, pgFlag, email, gId, sdate, edate, title, contents 
+ 		from a407.schedule 
+ 		where email = #{email}
+ 	</select>
+ 	
+ 	<update id="updateSchedule" parameterType="ScheduleDto">
+ 		update a407.schedule
+ 		set pgFlag=#{pgFlag}, email=#{email}, gId=#{gId}, sdate=#{sdate}, edate=#{edate}, title=#{title}, contents=#{contents}
+ 		where sId = #{sId}
+ 	</update>
+ 	
+ 	<delete id="deleteSchedule" parameterType="int">
+ 		delete from a407.schedule where sId = #{sId}
+ 	</delete>
+ </mapper> 

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.ssafy.a407.dao.GroupDao">
+ 	<delete id="removeGroup" parameterType="int">delete from a407.group where gId = #{gId}</delete>
+ 	<update id="updateGroup" parameterType="map">update a407.group set max = #{max}, edate = #{edate}, groupName = #{groupName}, groupDesc = #{groupDesc}, img = #{img}, category = #{category}, region = #{region}, onoff = #{onoff}, groupFlag = #{groupFlag}, cycle = #{cycle} where gId = #{gId}</update>
+
+ 	<select id="selectList" resultType="GroupDto">
+		select *
+		from a407.group
+	</select>
+	
+	<select id="selectGroupName" parameterType="String" resultType="GroupDto">
+		select *
+		from a407.group
+		where groupName like CONCAT('%', #{word}, "%") and edate > now()
+	</select>
+	
+	<select id="selectGroupDesc" parameterType="String" resultType="GroupDto">
+		select *
+		from a407.group
+		where groupDesc like CONCAT('%', #{word}, "%") and edate > now()
+	</select>
+	
+	<select id="selectCategory" parameterType="String" resultType="GroupDto">
+		select *
+		from a407.group
+		where category like CONCAT('%', #{word}, "%") and edate > now()
+	</select>
+	
+	<select id="selectRegion" parameterType="String" resultType="GroupDto">
+		select *
+		from a407.group
+		where region like CONCAT('%', #{word}, "%") and edate > now()
+	</select>
+	
+	<select id="selectGId" parameterType="String" resultType="GroupDto">
+		select *
+		from a407.group
+		where gId = #{word}
+	</select>
+	
+	<insert id="insertGroup" parameterType="GroupDto">
+ 		insert into a407.group (email, nickname, max, sdate, edate, groupName, groupDesc, category, onoff, region, img, groupFlag, cycle)
+ 		values (#{email},#{nickname},#{max},now(),#{edate},#{groupName},#{groupDesc},#{category},#{onoff},#{region},#{img},1,#{cycle})
+ 	</insert>
+ 	
+ </mapper> 

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.a407.dao.GroupBoardDao">
+	<insert id="createBoard" parameterType="GroupBoardDto">
+		insert into gBoard (gId, email, nickname, title, contents, noticeFlag, date,category) values (#{gId}, #{email}, #{nickname}, #{title}, #{contents}, #{noticeFlag}, now(),#{category})
+	</insert>
+	
+	<select id="searchAll" resultType="GroupBoardDto">
+		select *
+		from a407.gBoard
+		where category = #{category} and gId = #{gId}
+	</select>
+	
+	<select id="searchBId" resultType="GroupBoardDto">
+		select *
+		from a407.gBoard
+		where bId = #{word} and gId = #{gId}
+	</select>
+	
+	<select id="searchTitle" resultType="GroupBoardDto">
+		select *
+		from a407.gBoard
+		where title like CONCAT('%', #{word}, "%") and gId = #{gId} and category = #{category} 
+	</select>
+	
+	<select id="searchName" resultType="GroupBoardDto">
+		select *
+		from a407.gBoard
+		where nickname like CONCAT('%', #{word}, "%") and gId =#{gId} and category = #{category}
+	</select>
+	
+	<select id="searchContents" resultType="GroupBoardDto">
+		select *
+		from a407.gBoard
+		where contents like CONCAT('%', #{word}, "%") and gId = #{gId} and category = #{category}
+	</select>
+	
+	<update id="updateBoard" parameterType="map">
+		update a407.gBoard 
+		set title = #{title}, contents = #{contents}, noticeFlag = #{noticeFlag}, category= #{category}, date = now()
+		where bId = #{bId} and email = #{email}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete 
+		from a407.gBoard 
+		where bId = #{bId}
+	</delete>
+</mapper>
